@@ -17,7 +17,7 @@
     "trailingComma": "all"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "fastify": "^1.14.1"
   }
 }
