@@ -4,17 +4,7 @@ const util = require("util");
 const urlLib = require("url");
 const fastify = require("fastify");
 const axios_1 = require("axios");
-const VALID_PHONES = new Set([
-    "13018040009",
-    "19842068287",
-    "15512459377",
-    "19362072765",
-    "18582210308",
-    "13018040009",
-    "19842068287",
-    "15512459377",
-    "19362072765",
-]);
+const VALID_PHONE_REGEX = /^1\d{10}$/;
 const CALL_PATH = "/call";
 const PORT = 4830;
 const setTimeoutPromise = util.promisify(setTimeout);
@@ -28,7 +18,7 @@ async function start() {
     });
     server.post(CALL_PATH, async (request) => {
         const { phone, webhookURL } = request.body;
-        if (typeof phone !== "string" || !VALID_PHONES.has(phone)) {
+        if (typeof phone !== "string" || !VALID_PHONE_REGEX.test(phone)) {
             return { error: "Expected a valid phone" };
         }
         if (typeof webhookURL !== "string" || !isValidURL(webhookURL)) {
