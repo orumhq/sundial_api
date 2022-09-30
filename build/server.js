@@ -12,7 +12,7 @@ async function start() {
     const server = fastify();
     // starting at an arbitrary number instead of 1 to avoid candidates conflating
     // this ID with an index in to the list of numbers they are asked to dial.
-    let nextID = 1234;
+    let nextID = 1000 + Math.round(Math.random() * 1000);
     server.get("/", async () => {
         return `The API server only supports POST requests to ${CALL_PATH}\n`;
     });
